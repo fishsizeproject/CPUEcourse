@@ -20,32 +20,13 @@ The course is led by Carl Smith (Nature Research Centre, Lithuania and Universit
 
 <br/>
 
-## Course content
-
-
-Lesson 1. [Introduction](1-introduction.md)
-
-
-<br/>
-
 ## 
 
 <br/>
 
 ## 
 
-<br/>
 
-## Online meetings
-
-In this course, it is expected that participants will mostly learn independently, but we will have three online meetings to go through the materials, ask questions and for general discussion. 
-
-These meetings will be recorded and videos will be available (below) immediately after the meeting.
-
-| Date  | Time (GMT+1) | Programme |
-| ------------- | ------------- |----|
-| 23 Nov, 2022  | 09:00  | Welcome and introductions, Q&As|
-| 24 Nov, 2022  | 12:00  | Q&As
 
 
 <br/>
