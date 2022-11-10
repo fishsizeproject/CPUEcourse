@@ -20,14 +20,6 @@ The course is led by Carl Smith (Nature Research Centre, Lithuania and Universit
 
 <br/>
 
-## 
-
-<br/>
-
-## 
-
-
-
 
 <br/>
 
