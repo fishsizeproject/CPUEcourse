@@ -9,11 +9,11 @@ layout: default
 
 This short course is aimed at introducing researchers to fisheries data analysis using linear models (LM), general linear models (GLM) and general linear mixed models (GLMM) in the R working environment. The sessions will be a blend of interactive demonstrations, lectures and Q&A sessions. Prior to the course, attendees will receive R script, example datasets and a list of R packages to install.
 
-By the end of the course, participants should be able to
-Undertake data exploration to avoid common pitfalls in tackling a data analysis
-Recognise data structures and fit appropriate models to CPUE data
-Understand and apply alternative approaches to model selection
-Interpret and present the results of statistical models
+**By the end of the course, participants should be able to:**
+- Undertake data exploration to avoid common pitfalls in tackling a data analysis
+- Recognise data structures and fit appropriate models to CPUE data
+- Understand and apply alternative approaches to model selection
+- Interpret and present the results of statistical models
 
 The course is led by Carl Smith (Nature Research Centre, Lithuania and University of Lodz, Poland) with an extensive expertise in statistical analyses and teaching. Additional teaching support is provided by Asta Audzijonyte (Nature Research Centre, Lithuania & University of Tasmania, Australia) and Egle Jakubavičiūtė (Nature Research Centre, Lithuania). 
 
