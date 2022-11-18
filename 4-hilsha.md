@@ -6,7 +6,7 @@ layout: default
 
 # Hilsha
 
-For this module you will need to download this [R sccript](Bitterling1_aa.R) and this [dataset](bitterling.csv).
+For this module you will need to download this [R sccript](Hilsha1.R) and this [dataset](hilsha.csv).
 
 
 
