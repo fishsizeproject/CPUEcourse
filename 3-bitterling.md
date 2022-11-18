@@ -6,7 +6,7 @@ layout: default
 
 # Bitterling
 
-For this module you will need to download this [R sccript](Trout1.R) and this [dataset](trout.csv).
+For this module you will need to download this [R sccript](Bitterling1_aa.R) and this [dataset](bitterling.csv).
 
 
 
