@@ -6,7 +6,7 @@ layout: default
 
 # Trout
 
-For this module
+For this module you will need to download this [R sccript](Trout1.R) and this [dataset](trout.csv).
 
 
 
