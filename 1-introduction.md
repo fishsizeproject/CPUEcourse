@@ -21,19 +21,6 @@ Finally, please run the [PackagesBayesWorkshop](PackagesCPUEworkshop_aa.R) file 
 
 <br/>
 
-## Timetable
-
-<br/>
-
-| Day | Time (CET) | Activity | Content |
-| --- | ----------- | --- | ----------- |
-| Wed 23rd Nov | 10:00-11:00 | Introduction, CPUE standardisation, LM/GLMs | Slides D1P1 |
-|  | 11:15-12:45 | Fit LM | Trout.R |
-|  | 13:15-14:30 | GLMMs | Slides D1P2 |
-|  | 15:00-16:00 | Fit GLM/GLMM | Bitterling.R |
-|  | 16:15-17:00 | Interpretation/presentation | Slides D1P3 |
-| Thu 24th Nov | 10:00-11:00 | Model selection, Zero-inflated models | Slides D2P1 |
-|  |  |  |  |
 
 
 

@@ -17,22 +17,40 @@ Interpret and present the results of statistical models
 
 The course is led by Carl Smith (Nature Research Centre, Lithuania and University of Lodz, Poland) with an extensive expertise in statistical analyses and teaching. Additional teaching support is provided by Asta Audzijonyte (Nature Research Centre, Lithuania & University of Tasmania, Australia) and Egle Jakubavičiūtė (Nature Research Centre, Lithuania). 
 
-
 <br/>
 
 ## Course content
 
-[Module 1 - Introduction](1-introduction.md)
+<br/>
 
-[Module 2 - Trout](1-trout.md)
+Module 1 - [Introduction](1-introduction.md)
 
-[Module 3 - Bitterling](1-bitterling.md)
+Module 2 - [Trout](2-trout.md)
 
-[Module 4 - Hilsha](1-hilsha.md)
+Module 3 - [Bitterling](3-bitterling.md)
 
-[Module 5 - Zander](1-zander.md)
+Module 4 - [Hilsha](4-hilsha.md)
+
+Module 5 - [Zander](5-zander.md)
 
 <br/>
+
+## Timetable
+
+<br/>
+
+| Day | Time (CET) | Activity | Content |
+| --- | ----------- | --- | ----------- |
+| Wed 23rd Nov | 10:00-11:00 | Introduction, CPUE standardisation, LM/GLMs | Slides D1P1 |
+|  | 11:15-12:45 | Fit LM | Trout.R |
+|  | 13:15-14:30 | GLMMs | Slides D1P2 |
+|  | 15:00-16:00 | Fit GLM/GLMM | Bitterling.R |
+|  | 16:15-17:00 | Interpretation/presentation | Slides D1P3 |
+| Thu 24th Nov | 10:00-11:00 | Model selection, Zero-inflated models | Slides D2P1 |
+|  | 11:15-13:00 | Fit zero-inflated GLMM |  |
+|  | 13:30-14:45 | Time-series analysis, Bayesian inference | Slides D2P2 |
+|  | 15:00-16:00 | Fit time-series GLMM | Zander.R |
+|  | 16:15-17:00 | Final discussion and questions |  |
 
 
 <br/>
