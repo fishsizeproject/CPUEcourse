@@ -22,7 +22,15 @@ The course is led by Carl Smith (Nature Research Centre, Lithuania and Universit
 
 ## Course content
 
-[Lesson 1](1-introduction.md)
+[Module 1 - Introduction](1-introduction.md)
+
+[Module 2 - Trout](1-trout.md)
+
+[Module 3 - Bitterling](1-bitterling.md)
+
+[Module 4 - Hilsha](1-hilsha.md)
+
+[Module 5 - Zander](1-zander.md)
 
 <br/>
 
