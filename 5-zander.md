@@ -6,7 +6,7 @@ layout: default
 
 # Zander
 
-For this module you will need to download this [R sccript](Hilsha1.R) and this [dataset](hilsha.csv).
+For this module you will need to download this [R sccript](Zander1_aa.R) and this [dataset](zander.csv).
 
 
 
