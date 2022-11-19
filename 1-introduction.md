@@ -5,7 +5,7 @@ editor_options:
     wrap: 72
 ---
 
-<sub>[Course Overview](index.md) \> Introduction</sub>
+<sub>[Course Overview](index.md) \> Introduction and preparation</sub>
 
 # Introduction
 

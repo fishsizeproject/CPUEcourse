@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<sub>[Course Overview](index.md) \> Bitterling</sub>
+<sub>[Course Overview](index.md) \> General linear mixed models</sub>
 
 # General linear mixed models: data from electrofishing surveys
 

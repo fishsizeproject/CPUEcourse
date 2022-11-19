@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<sub>[Course Overview](index.md) \> Zander</sub>
+<sub>[Course Overview](index.md) \> Time series analysis and Bayesian inference</sub>
 
 # Time series analysis and Bayesian inference
 

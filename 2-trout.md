@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<sub>[Course Overview](index.md) \> Trout</sub>
+<sub>[Course Overview](index.md) \> Fitting linear models</sub>
 
 # Fitting linear models: recreational catch data example
 
@@ -16,8 +16,7 @@ The [R script](Trout1.R) and the example [dataset](trout.csv). You can also acce
 
 ## Slides and video
 
-Course slides can be downloaded here. 
-The tutorial video from the online course meeting will be available here after November 23.
+Course slides can be downloaded here. The tutorial video from the online course meeting will be available here after November 23.
 
 ## Further resources
 
