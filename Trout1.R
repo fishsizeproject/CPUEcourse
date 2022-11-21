@@ -6,25 +6,40 @@
 ######################################
 
 # Start by loading packages
+library(anytime)
 library(arm)
+library(bit)
+library(brinla)
 library(car)
+library(cellranger)
+library(DHARMa)
+library(gargle)
+library(GGally)
+library(ggeffects)
 library(ggplot2)
+library(ggpubr)
+library(glmmTMB)
+library(grid)
+library(gridExtra)
+library(INLA)
+library(inlatools)
 library(lattice)
 library(lawstat)
+library(lme4)
+library(mgcv)
+library(nlme)
 library(outliers)
+library(performance)
+library(plotly)
+library(plyr)
 library(tidyverse)
 library(scales)
-library(GGally)
-library(mgcv)
-library(plyr)
-library(lme4)
-library(gridExtra)
-library(DHARMa)
-library(glmmTMB)
-library(sjPlot)
-library(sjmisc)
 library(sjlabelled)
-library(ggeffects)
+library(sjmisc)
+library(sjPlot)
+library(timechange)
+library(tzdb)
+library(vroom)
 
 ######################################
 
@@ -244,7 +259,7 @@ M1 <- lm(catch ~ anglers + fSeason,
                  data = trout1)
 
 M2 <- lm(catch ~ anglers * fSeason,
-         data = trout1)
+                 data = trout1)
 
 round(AIC(M1,M2),0)
 
@@ -442,11 +457,12 @@ ggpredict(M1, c("anglers", "fSeason"))
 # And plot
 # Catch as a function of effort
 plot(ggpredict(M1, c("anglers")))
+plot(ggpredict(M1, c("fSeason")))
 plot(ggpredict(M1, c("anglers", "fSeason")))
 
 # Plot model with interaction...
 plot(ggpredict(M2, c("anglers", "fSeason")))
-# Some variation in slopes...maybe we should have used this model
+# Some variation in slopes (i.e. CPUE)...maybe we should have used this model...
 
 ###############################
 
@@ -467,6 +483,7 @@ summary(GAM1, show.signif.stars = FALSE)
 
 # No significant smoothers
 
+plot(ggpredict(GAM1, c("anglers", "fSeason")))
 
 ############################### END
 

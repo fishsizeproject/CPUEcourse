@@ -5,35 +5,45 @@
 ######################################
 
 # Start by loading packages
+library(anytime)
 library(arm)
+library(bit)
+library(brinla)
 library(car)
+library(cellranger)
+library(DHARMa)
+library(gargle)
+library(GGally)
+library(ggeffects)
 library(ggplot2)
+library(ggpubr)
+library(glmmTMB)
+library(grid)
+library(gridExtra)
+library(INLA)
+library(inlatools)
 library(lattice)
 library(lawstat)
+library(lme4)
+library(mgcv)
+library(nlme)
 library(outliers)
+library(performance)
+library(plotly)
+library(plyr)
 library(tidyverse)
 library(scales)
-library(lattice)  
-library(ggplot2)
-library(GGally)
-library(mgcv)
-library(plyr)
-library(lme4)
-library(car)
-library(gridExtra)
-library(GGally)
-library(DHARMa)
-library(glmmTMB)
-library(sjPlot)
-library(sjmisc)
 library(sjlabelled)
-library(plotly)
-library(nlme)
-library(anytime)
-library(ggpubr)
+library(sjmisc)
+library(sjPlot)
+library(timechange)
+library(tzdb)
+library(vroom)
 
 # Install the latest stable version of INLA:
-#install.packages("INLA", repos=c(getOption("repos"), INLA="https://inla.r-inla-download.org/R/stable"), dependencies=TRUE, force = T)
+# install.packages("INLA", repos=c(getOption("repos"),
+#                 INLA="https://inla.r-inla-download.org/R/stable"),
+#                 dep=TRUE)
 library(INLA)
 
 # Also install brinla
@@ -96,11 +106,12 @@ table(zan$Month)
 # Create variable combining year and month
 zan$YrMon <- anydate(paste(zan$Year, zan$Mon, sep = "_"))
 table(zan$YrMon)
+# Rather a lot of levels - perhaps keep year and month separate
+# and nest month in year
 
 # Balance among stations?
 zan$fStn <- as.factor(zan$Station)
 table(zan$Station)
-
 # 47  51  52 
 # 601 378 607 
 
@@ -108,6 +119,7 @@ table(zan$Station)
 table(zan$Gear)
 # Fyke Gillnet    Line  Others   Trawl 
 # 593     823      48     110      12 
+# Poor balance
 
 # Just keep Fyke and Gillnet
 zan1 <- zan[zan$Gear %in% c("Fyke", "Gillnet"), ]
@@ -115,10 +127,12 @@ table(zan1$Gear)
 
 # Fyke Gillnet 
 # 593     823 
+# Better
 
 # Range of catch
 range(zan1$Catch)
-#0.001 - 30.038 (no zeros)
+# 0.001 - 30.038 (no zeros)
+# Were zeros removed?
 
 # Define preferred figure format
 My_theme <- theme(panel.background = element_blank(),
@@ -250,6 +264,7 @@ ggplot(zan1, aes(x = Effort, y = (Catch))) +
   xlab("Effort") + ylab("Catch") +
   facet_grid(.~Gear)
 # Possible interaction - but we may drop Fyke
+# (looks like gear x effort collinearity)
 
 # Catch and year
 ggplot(zan1, aes(x = Year, y = (Catch))) +
@@ -302,38 +317,47 @@ table(zan3$Gear)
 # 5.	No serious collinearity
 # 6.  Some imbalance (but refining the data removes this problem)
 # 7.  Data are a time series (i.e. dependency due to Year and Months within years)
+#     'Year' and 'Month' cannot be treated as a fixed effects.
+#     They also cannot be treated as random terms - levels are not independent.
+#     A simple GLM is not an option...but neither is a GLMM.
+#     We need a time-series analysis to standardise these data.
 
 #####################################
 
-# Aim: Standardise zander catch (kg) as a function of effort
-#      among months, years and regions for gillnet catch
+# Aim: Standardise zander gillnet catch (kg) as a function  
+#      of effort, region, years, and months within years
 
-# Apply (Bayesian) INLA model for time series analysis with rw1
+# Apply (Bayesian) INLA model for time-series analysis with
+# a random walk model of order 1 (RW1)
+# This model has 2 residual components, trend due to time (year) + pure noise
 
-# Start with intercept only model and just year random term
+# Start with intercept only model. 
+# Catch is modelled as a function of year and 'rw1' imposes a temporal trend
+
+# Create a formula
 f1 <- Catch ~ + f(Year, model = "rw1")
 
-# Fit with gamma distribution
+# And fit with INLA with a gamma distribution
+# A gamma distribution is strictly positive (no zeros) and skewed (like our catch data)
 I1 <- inla(f1, 
-           control.compute = list(dic = TRUE),
+           control.compute = list(dic = TRUE), #estimate dic for model comparison
            family = "Gamma",
            data = zan3)
 
-# And compare with Gaussian
+# And compare with Gaussian (not appropriate for these data...)
 I2 <- inla(f1, 
            control.compute = list(dic = TRUE),
            family = "gaussian",
            data = zan3)
 
-# Compare models with DIC
+# Compare models with DIC (deviance information criterion - like AIC)
 round(I1$dic$dic,0) #4179 <- gamma fits better
 round(I2$dic$dic,0) #5107
 
-
+# Plot the time(year) trend
 Yearsm <- I1$summary.random$Year
 Fit1   <- I1$summary.fitted.values[,"mean"]
 
-# Figure
 par(mfrow = c(1,1), mar = c(5,5,2,2), cex.lab = 1.5)
 plot(Yearsm[,1:2], type='l',
      xlab = 'Year', 
@@ -342,9 +366,7 @@ plot(Yearsm[,1:2], type='l',
 abline(h=0, lty=3)
 lines(Yearsm[, c(1, 4)], lty=2)
 lines(Yearsm[, c(1, 6)], lty=2)
-
-E1 <- zan3$Catch - I1$summary.fitted.values$mean
-acf(E1)
+# Differs from zero...
 
 # Add Effort to model
 f2 <- Catch ~ Effort + f(Year, model = "rw1")
@@ -358,14 +380,14 @@ round(I2$dic$dic,0) #3532 <- including Effort improves fit
 Yearsm <- I2$summary.random$Year
 plot(Yearsm[,1:2], type='l',
      xlab = 'Year', 
-     ylab = 'Trend',
+     ylab = 'Random walk trend',
      ylim = c(-0.2, 0.2) )
 abline(h=0, lty=3)
 lines(Yearsm[, c(1, 4)], lty=2)
 lines(Yearsm[, c(1, 6)], lty=2)
 
-E2 <- zan3$Catch - I2$summary.fitted.values$mean
-acf(E2)
+# E2 <- zan3$Catch - I2$summary.fitted.values$mean
+# acf(E2)
 
 # Fit model with rw2 (should be a smoother fit)
 f3 <- Catch ~ Effort + f(Year, model = "rw2")
@@ -378,13 +400,13 @@ I3 <- inla(f3,
 round(I2$dic$dic,0) #3532 
 round(I3$dic$dic,0) #3525 <- rw2 better than rw1
 
-E3 <- zan3$Catch - I3$summary.fitted.values$mean
-acf(E3)
+# E3 <- zan3$Catch - I3$summary.fitted.values$mean
+# acf(E3)
 
 Yearsm <- I3$summary.random$Year
 plot(Yearsm[,1:2], type='l',
      xlab = 'Year', 
-     ylab = 'Smoother',
+     ylab = 'Random walk trend',
      ylim = c(-2, 2) )
 abline(h=0, lty=3)
 lines(Yearsm[, c(1, 4)], lty=2)
@@ -413,7 +435,7 @@ par(mfrow = c(1,2), mar = c(5,5,2,2), cex.lab = 1.5)
 Yearsm   <- I4$summary.random$Year
 plot(Yearsm[,1:2], type='l',
      xlab = 'Year', 
-     ylab = 'Smoother',
+     ylab = 'Random walk trend',
      ylim = c(-1, 1) )
 abline(h=0, lty=3)
 lines(Yearsm[, c(1, 4)], lty=2)
@@ -455,7 +477,7 @@ par(mfrow = c(1,2), mar = c(5,5,2,2), cex.lab = 1.5)
 Yearsm   <- I5$summary.random$Year
 plot(Yearsm[,1:2], type='l',
      xlab = 'Year', 
-     ylab = 'Smoother',
+     ylab = 'Random walk trend',
      ylim = c(-1, 1) )
 abline(h=0, lty=3)
 lines(Yearsm[, c(1, 4)], lty=2)
@@ -464,7 +486,7 @@ lines(Yearsm[, c(1, 6)], lty=2)
 Monsm   <- I5$summary.random$Mon
 plot(Monsm[,1:2], type='l',
      xlab = 'MonthInYear', 
-     ylab = 'Smoother',
+     ylab = 'Random walk trend',
      ylim = c(-3, 3) )
 abline(h=0, lty=3)
 lines(Monsm[, c(1, 4)], lty=2)
@@ -487,8 +509,8 @@ I6 <- inla(f6,
 round(I5$dic$dic,0) #2980 
 round(I6$dic$dic,0) #2977 <- including year as rw1 improves fit (marginally)
 
-outI6 <- I6$summary.fixed[,c("mean", "sd", "0.025quant", "0.975quant")]
-print(outI6, digits = 2)
+# outI6 <- I6$summary.fixed[,c("mean", "sd", "0.025quant", "0.975quant")]
+# print(outI6, digits = 2)
 
 Fit6 <- I6$summary.fitted.values[,"mean"]
 
@@ -496,7 +518,7 @@ par(mfrow = c(1,1), mar = c(5,5,2,2), cex.lab = 1.5)
 Yearsm   <- I6$summary.random$Year
 plot(Yearsm[,1:2], type='l',
      xlab = 'Year', 
-     ylab = 'Smoother',
+     ylab = 'Random walk trend',
      ylim = c(-1, 1) )
 abline(h=0, lty=3)
 lines(Yearsm[, c(1, 4)], lty=2)
@@ -505,7 +527,7 @@ lines(Yearsm[, c(1, 6)], lty=2)
 Monsm   <- I6$summary.random$Mon
 plot(Monsm[,1:2], type='l',
      xlab = 'MonthInYear', 
-     ylab = 'Smoother',
+     ylab = 'Random walk trend',
      ylim = c(-3, 3) )
 abline(h=0, lty=3)
 lines(Monsm[, c(1, 4)], lty=2)
@@ -532,6 +554,20 @@ abline(h = 0, lty = 2, col = 1)
 
 # Plot residuals versus station
 boxplot(E1 ~ Station, 
+        ylab = "Pearson residuals",
+        data = zan3)
+abline(h = 0, lty = 2)
+# OK
+
+# Year
+boxplot(E1 ~ Year, 
+        ylab = "Pearson residuals",
+        data = zan3)
+abline(h = 0, lty = 2)
+# OK
+
+# Month
+boxplot(E1 ~ Month, 
         ylab = "Pearson residuals",
         data = zan3)
 abline(h = 0, lty = 2)
@@ -580,11 +616,12 @@ f7 <- Catch ~ Effort * fStn +
   f(Year, 
     model = "rw1") +
   f(Mon, 
-    model = "rw2", cyclic = TRUE)
+    model = "rw2",
+        cyclic = T)
 
 I7 <- inla(f7, 
            control.predictor = list(compute = TRUE),
-           control.compute = list(dic = TRUE),
+           control.compute = list(config = TRUE, dic = TRUE),
            family = "Gamma",
            control.family = list(link = "log"),
            data = zan3)
@@ -598,16 +635,16 @@ par(mfrow = c(1,1), mar = c(5,5,2,2), cex.lab = 1.5)
 Yearsm   <- I7$summary.random$Year
 plot(Yearsm[,1:2], type='l',
      xlab = 'Year', 
-     ylab = 'Smoother',
+     ylab = 'Random walk trend',
      ylim = c(-1, 1) )
 abline(h=0, lty=3)
 lines(Yearsm[, c(1, 4)], lty=2)
 lines(Yearsm[, c(1, 6)], lty=2)
 
-Monsm   <- I6$summary.random$Mon
+Monsm   <- I7$summary.random$Mon
 plot(Monsm[,1:2], type='l',
      xlab = 'MonthInYear', 
-     ylab = 'Smoother',
+     ylab = 'Random walk trend',
      ylim = c(-3, 3) )
 abline(h=0, lty=3)
 lines(Monsm[, c(1, 4)], lty=2)
@@ -674,14 +711,14 @@ resplot2 + facet_grid(~fStn)
 ggarrange(resplot1, resplot2,
           labels = c("I6", "I7"),
           ncol = 2, nrow = 1)
-# A big improvement
+# A big improvement in interaction with Station included
 
-# Check with a GAM 
+# Check for non-linearity with a GAM 
 Test2 <- gam(E2 ~ s(Effort), data = zan3)
 summary(Test2)
-# That is 9% explained by the smoother is still significant! Still needs work...
+# That is 9% explained by the smoother and is still significant! Still needs work...
 
-# Plot random effects
+# Plot temporal effects
 p1 <- bind_rows(
   I7$summary.random$Year %>%
     select(Year = 1, mean = 2, lcl = 4, ucl = 6) %>%
@@ -720,7 +757,7 @@ MyData <- ddply(zan3,
                              max(Effort), 
                              length = 50))
 
-# Set all other continous covariates 
+# Set continuous covariates 
 MyData$Year <- 2002
 MyData$Mon  <- 1
 
@@ -805,9 +842,9 @@ MyData <- ddply(zan3,
                              max(Year), 
                              length = 50))
 
-# Set all other continuous covariates 
+# Set continuous covariates 
 MyData$Effort <- 20000
-MyData$fStn  <- 52
+MyData$fStn  <- 47
 
 head(MyData)
 
@@ -842,9 +879,9 @@ label_mon <- c("1" = "Jan",
                "7" = "Jul", 
                "8" = "Aug",
                "9" = "Sep",
-               "10" = "Oct", 
-               "11" = "Nov",
-               "12" = "Dec")
+              "10" = "Oct", 
+              "11" = "Nov",
+              "12" = "Dec")
 # Plot
 ggplot() +
   ggtitle("Gillnet CPUE for zander") +
@@ -870,13 +907,17 @@ ggplot() +
 
 # It appears that there has been a decline in CPUE for zander since 1998
 
-# Estimates? Yes...but complicated.
+# Model could be improved with a different trend for each station and in each month
+# We could also incorporate prior information more effectively....
+
+# Estimates? Yes...but complicated with INLA
 
 # In INLA there is no 'predict' function as for glm/lm in R. 
 # Predictions must to performed as a part of the model fitting itself. 
 # As prediction is the same as fitting a model with some missing data,
 # we can simply set y[i] = NA for those 'locations' we want to predict.
 
-# I will run a workshop on Bayesian fisheries with INLA in the future...
+# I will run a more advanced workshop on Bayesian fisheries analysis
+# using INLA in the future...
 
 ###################################### END

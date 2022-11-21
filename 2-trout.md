@@ -16,10 +16,10 @@ The [R script](Trout1.R) and the example [dataset](trout.csv). You can also acce
 
 ## Slides and video
 
-Course slides can be downloaded here. The tutorial video from the online course meeting will be available here after November 23.
+Course slides will soon be available here. The tutorial video from the online course meeting will be available here after November 23.
 
 ## Further resources
 
-Links to further resources can be added here.
+Links to further resources will be added here briefly.
 
 <br/>
