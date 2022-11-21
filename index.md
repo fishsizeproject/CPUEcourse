@@ -15,8 +15,8 @@ biologists and practitioners
 ![course_image](./images/course_image.png)
 
 This short course is aimed at introducing researchers to fisheries data
-analysis using linear models (LM), general linear models (GLM) and
-general linear mixed models (GLMM) in the R working environment.
+analysis using linear models (LM), generalized linear models (GLM) and
+generalized linear mixed models (GLMM) in the R working environment.
 Scientific monitoring and artisanal, commercial or recreational fish
 catch data is often used to assess population status, but such data are
 usually complex and require careful standardisation.

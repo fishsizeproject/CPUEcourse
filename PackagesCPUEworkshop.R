@@ -6,15 +6,16 @@
 
 # You need to be online for this.
 
-
-## You might need to install package Rtools. If it is not available from CRAN for the latest version of R, you can download the installer from this page
-#https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html
+# You might need to install the package 'Rtools42'. 
+# If it is not available from CRAN for the latest version of R, 
+# you can download the installer from this page:
+# https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html
 
 # In R-studio run the following: 
-toInstall <- c("anytime", "arm", "car", "DHARMa", "GGally", "ggplot2", "ggpubr", 
-               "glmmTMB", "grid", "gridExtra", "lattice", "lawstat", "lme4", 
-               "mgcv", "nlme", "outliers", "plotly", "plyr", "tidyverse",
-               "scales", "sjlabelled", "sjmisc", "sjPlot", "cellranger","gargle", "timechange", "tzdb", "vroom", "bit")
+toInstall <- c("anytime", "arm", "bit", "car", "cellranger", "DHARMa", "gargle", "GGally",
+               "ggeffects", "ggplot2", "ggpubr", "glmmTMB", "grid", "gridExtra", "lattice", 
+               "lawstat", "lme4", "mgcv", "nlme", "outliers", "performance", "plotly", "plyr",
+               "tidyverse", "scales", "sjlabelled", "sjmisc", "sjPlot",  "timechange", "tzdb", "vroom")
 
 # Then:
 install.packages(toInstall, 
@@ -44,10 +45,14 @@ remotes::install_github("inbo/inlatools")
 # Then load all the packages:
 library(anytime)
 library(arm)
+library(bit)
 library(brinla)
 library(car)
+library(cellranger)
 library(DHARMa)
+library(gargle)
 library(GGally)
+library(ggeffects)
 library(ggplot2)
 library(ggpubr)
 library(glmmTMB)
@@ -61,6 +66,7 @@ library(lme4)
 library(mgcv)
 library(nlme)
 library(outliers)
+library(performance)
 library(plotly)
 library(plyr)
 library(tidyverse)
@@ -68,10 +74,14 @@ library(scales)
 library(sjlabelled)
 library(sjmisc)
 library(sjPlot)
+library(timechange)
+library(tzdb)
+library(vroom)
 
-##if loading some of these libraries produces errors like this 
-#Error: package or namespace load failed for ‘tidyverse’: .onLoad failed in loadNamespace() for 'readr', details: call: loadNamespace(x) error: there is no package called ‘tzdb’
-#you just need to install the missing package separately, using install.package("tzdb") in this specific case 
+# If loading some of these libraries produces errors like: 
+# Error: package or namespace load failed for ‘tidyverse’: .onLoad failed in loadNamespace() for 'readr', 
+# details: call: loadNamespace(x) error: there is no package called ‘tzdb’
+# You just need to install the missing package separately, using install.package("tzdb") in this specific case 
 
 
 # If you want to be 100% sure that ggplot2 is working properly,
@@ -103,9 +113,9 @@ print(sum.Itest, digits = 3)
 # (Intercept) 0.1002     -0.103      0.303
 # X          -0.0519     -0.252      0.148
 
+# If you have problems, try restarting R and reload the packages
+
 ############ GOOD LUCK! ################
 
-# ...let me know if you need help or have problems
-# if you are having problems - please write to the course repository discussion group on this link 
-# you will need a GitHub account to post there, but hey - it is very useful to have one
+
 

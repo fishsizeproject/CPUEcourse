@@ -6,31 +6,40 @@
 ######################################
 
 # Start by loading packages
+library(anytime)
 library(arm)
+library(bit)
+library(brinla)
 library(car)
+library(cellranger)
+library(DHARMa)
+library(gargle)
+library(GGally)
+library(ggeffects)
 library(ggplot2)
+library(ggpubr)
+library(glmmTMB)
+library(grid)
+library(gridExtra)
+library(INLA)
+library(inlatools)
 library(lattice)
 library(lawstat)
+library(lme4)
+library(mgcv)
+library(nlme)
 library(outliers)
+library(performance)
+library(plotly)
+library(plyr)
 library(tidyverse)
 library(scales)
-library(lattice)  
-library(ggplot2)
-library(GGally)
-library(mgcv)
-library(plyr)
-library(lme4)
-library(car)
-library(gridExtra)
-library(GGally)
-library(DHARMa)
-library(glmmTMB)
-library(sjPlot)
-library(sjmisc)
 library(sjlabelled)
-library(performance)
-library(tweedie)
-library(ggeffects)
+library(sjmisc)
+library(sjPlot)
+library(timechange)
+library(tzdb)
+library(vroom)
 
 ######################################
 
@@ -141,10 +150,13 @@ table(hils$Area)
 # 3            4           18            2 
 # Severe imbalance - 3 main fishing areas: BayofBengal, LowerMeghna, LowerPadma
 
+# (Padma is the name of the Ganges in Bangladesh)
+# (The Meghna comprises the Brahmaputra and Ganges)
+
 table(hils$Gear)
 # Gillnet 
 # 1221
-# I filtered out other gears in Excel
+# I filtered out other gears in Excel - gillnet is the most common
 
 ######################################
 
@@ -175,10 +187,10 @@ dim(hils1)
 p1 <- multi_dotplot(hils1, order, Nlength)
 p2 <- multi_dotplot(hils1, order, TripDays)
 p3 <- multi_dotplot(hils1, order, Catch)
-grid.arrange(p1, p2, p3, nrow = 1)
+grid.arrange(p1, p2, p3, nrow = 3)
 # Better
 
-# Drop all except 3 main fishing areas
+# Drop all except 3 main hilsha fishing areas
 hils2 <- hils1[hils1$Area %in% c("BayofBengal", "LowerMeghna", "LowerPadma"), ]
 table(hils2$Area)
 # BayofBengal LowerMeghna  LowerPadma 
@@ -374,14 +386,15 @@ check_overdispersion(M2)
 #               p-value =   0.896
 # Better. Can we improve model fit?
 
-# Handle dependency due to area and month as random terms
+# Handle dependency due to area (spatial) and month (temporal) as random terms
 M3 <- glmmTMB(Catch ~ TripDays + Nlength +
                      (1|Area) + (1|YrMonth),
                       family = "nbinom1"(link = "log"),
                       ziformula=~ 0,
                       data = hils4)
 # Warning message: possibly the model is overparameterised 
-#(i.e. the data does not contain enough information to estimate model parameters properly)
+# (i.e. the data does not contain enough information to estimate model parameters properly)
+# table(hils4$Area,hils4$YrMonth)
 check_overdispersion(M3)
 
 
@@ -390,9 +403,9 @@ check_overdispersion(M3)
 #               p-value =   0.92
 
 # Try a zero-inflated negative binomial model (ZINB1)
-M4 <- glmmTMB(Catch ~ Area + Nlength + TripDays + YrMonth,
+M4 <- glmmTMB(Catch ~ Area + Nlength + TripDays + YrMonth, # models count data
                       family = "nbinom1"(link = "log"),
-                      ziformula=~ 1,
+                      ziformula=~ 1,                       # models binomial data
                       data = hils4)
 check_overdispersion(M4)
 
@@ -402,9 +415,9 @@ check_overdispersion(M4)
 
 
 # Zero-inflated negative binomial (ZINB2)
-M5 <- glmmTMB(Catch ~ Area + Nlength + TripDays + YrMonth,
+M5 <- glmmTMB(Catch ~ Area + Nlength + TripDays + YrMonth, # models count data
                       family = "nbinom1"(link = "log"),
-                      ziformula =~ Area + YrMonth,
+                      ziformula =~ Area + YrMonth,         # models binomial data
                       data = hils4)
 check_overdispersion(M5)
 
@@ -486,7 +499,7 @@ abline(0,0, lty=2)
 # number of zeros in the data should match simulated zeros
 par(mfrow = c(1,1), mar = c(5,5,3,3))
 
-# Model M2 (NB GLMM)
+# Model M2 (NB GLM)
 testZeroInflation(M2)
 
 # Model M2 (NB GLMM)
@@ -585,7 +598,7 @@ summary(M2)
 
 tab_model(M2,
           show.zeroinf = F,
-          dv.labels = c("Generalised Poisson GLM (Hilsha)"),
+          dv.labels = c("NB GLM (Hilsha)"),
           string.pred = "Coeffcient",
           string.ci = "Conf. Int (95%)",
           string.p = "P-value",
@@ -635,7 +648,14 @@ plot(ggpredict(M2, c("TripDays", "Area")))
 plot(ggpredict(M2, c("TripDays", "YrMonth")))
 plot(ggpredict(M2, c("TripDays", "Area", "YrMonth")))
 
+# CPUE
+plot(ggpredict(M2, c("Area")))
+plot(ggpredict(M2, c("YrMonth")))
+plot(ggpredict(M2, c("Area", "YrMonth")))
+
 # But this model needs more work...
 # Perhaps a zero-inflated random slope and intercept model?
+# Or try a 'tweedie' distribution
+# Or time series
 
 ###############################END

@@ -6,28 +6,40 @@
 ######################################
 
 # Start by loading packages
+library(anytime)
 library(arm)
+library(bit)
+library(brinla)
 library(car)
+library(cellranger)
+library(DHARMa)
+library(gargle)
+library(GGally)
+library(ggeffects)
 library(ggplot2)
+library(ggpubr)
+library(glmmTMB)
+library(grid)
+library(gridExtra)
+library(INLA)
+library(inlatools)
 library(lattice)
 library(lawstat)
-library(ggeffects)
+library(lme4)
+library(mgcv)
+library(nlme)
 library(outliers)
+library(performance)
+library(plotly)
+library(plyr)
 library(tidyverse)
 library(scales)
-library(lattice)  
-library(GGally)
-library(mgcv)
-library(plyr)
-library(lme4)
-library(gridExtra)
-library(DHARMa)
-library(glmmTMB)
-library(sjPlot)
-library(sjmisc)
 library(sjlabelled)
-library(performance)
-library(ggeffects)
+library(sjmisc)
+library(sjPlot)
+library(timechange)
+library(tzdb)
+library(vroom)
 
 ######################################
 
@@ -74,7 +86,7 @@ colSums(is.na(bitt))
 # No missing data
 
 # Are data balanced among levels of the categorical covariates?
-# Balance among lochs?
+# Balance among oxbows?
 table(bitt$oxbow)
 # 1  2  3  4  5  6  7  8 
 # 16 16 16 16 16 16 16 16 
@@ -121,7 +133,7 @@ grubbs.test(bitt$catch, type = 10)
 
 # Frequency polygon plot for catch
 bitt %>% ggplot(aes(catch)) +
-  geom_freqpoly(bins = 4) +
+  geom_freqpoly(bins = 6) +
   labs(x = "Bitterling caught", y = "Frequency") +
   My_theme +
   theme(panel.border = element_rect(colour = "black", 
@@ -208,7 +220,7 @@ ggplot(bitt, aes(x = points, y = (catch))) +
   My_theme +
   xlab("Points") + ylab("Catch") +
   facet_grid(season~habitat)
-# Yes
+# CPUE slope varies between habitats - interaction
 
 # Oxbow x habitat
 ggplot(bitt, aes(x = points, y = (catch))) +
@@ -265,6 +277,7 @@ bitt1$fHabitat <- dplyr::recode(bitt1$fHabitat,
 # bitt1$points.std <- (bitt1$points-mean(bitt1$points))/sd(bitt1$points)
 
 # Response variable is counts, so start with Poisson - simple but makes assumptions
+
 # Include all covariates(?)
 # Include fSeason * fHabitat interaction based on data exploration
 
@@ -279,14 +292,28 @@ check_overdispersion(M1)
 #               p-value < 0.001
 # The model is overdispersed
 
+# How does catch vary among oxbow lakes?
+boxplot(catch ~ oxbow, 
+         data = bitt1,
+         xlab = "Oxbow lake",
+         ylab = "Catch",
+        range = 0,
+          col = "goldenrod2",
+          pch = 16, 
+      cex.lab = 1.5)
+abline(median(bitt1$catch),0, 
+          lty = 1, col = "red2")
+# Quite large differences
+
 # There is dependency (by design) due to oxbow lake, though we are not really interested in differences
-# among oxbow lakes. In this case we can include oxbow as a 'random' term in a mixed model (GLMM)
+# among oxbow lakes. In this case we can include oxbow as a 'random' term in a mixed model (GLMM).
+
 # Here, we pool information from all oxbows to improve our estimates of each individual oxbow.
 # This approach is sometimes called partial pooling and enables our conclusions to apply to all
 # oxbow lakes.
 
-M2 <- glmmTMB(catch ~ fYear + fSeason * fHabitat + points +
-                      (1|fOxbow),
+M2 <- glmmTMB(catch ~ fYear + fSeason * fHabitat + points + # Fixed part
+                      (1|fOxbow),                           # Random part
                       family = "poisson"(link = "log"),
                       data = bitt1)
 
@@ -299,7 +326,7 @@ check_overdispersion(M2)
 
 # What causes overdispersion?
 
-# An alternative distribution is negative binomial - like Poisson, but has an extra parameter 
+# An alternative distribution is negative binomial distribution - like Poisson, but has an extra parameter 
 # to model dispersion (it will cost us an extra degree of freedom though)
 
 M3 <- glmmTMB(catch ~ fYear + fSeason * fHabitat + fOxbow + points,
@@ -337,8 +364,8 @@ colnames(Out) <- c("df", "AIC")
 round(Out,0)
 
 #              df AIC
-# Poisson GLM  15 929
-# Poisson GLMM  9 945
+# Poisson GLM  15 929 <- overdispersed
+# Poisson GLMM  9 945 <- overdispersed
 # NB GLM       16 889 <- best fit, but...dependency
 # NB GLMM      10 898
 
@@ -382,6 +409,7 @@ boxplot(Res1 ~ fYear,
         col = "green2",
         pch = 16, cex.lab = 1.5)
 abline(0,0, lty=2)
+# Problem here - pseudoreplication
 
 # Season
 boxplot(Res1 ~ fSeason, 
@@ -441,6 +469,8 @@ summary(M4)
 # fHabitatveg                1.089667   0.084219  12.939  <0.001
 # points                     0.022608   0.002723   8.304  <0.001
 # fSeasonautumn:fHabitatveg  0.271882   0.109681   2.479   0.013
+
+# Notice the trend with Year...
 
 ###############################
 
@@ -565,4 +595,12 @@ plot(ggpredict(M4, c("fYear", "fSeason", "fHabitat")))
 plot(ggpredict(M4, c("fYear", "fHabitat", "fOxbow")))
 # plot(ggpredict(M4, c("fYear", "fSeason", "fHabitat", "fOxbow")))
 
+# Looks like a decline in CPUE among years, seasons, habitats, and sites
+# Does anyone know why?
+
+# The model treats each level of fYear (95-98) as independent - but they are not.
+# Bitterling population size within oxbows in 1998 depends on size in 1997,
+# which depends on 1996, which depends on 1995...a decaying temporal trend.
+
 ############################### END
+
