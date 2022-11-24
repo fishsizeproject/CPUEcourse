@@ -25,7 +25,7 @@ any R session by opening RStudio (R will be opened automatically).
 
 It is very important that you install all the required packages before
 the course and make sure they all work. To do that, please download and
-run the [PackagesCPUEWorkshop](PackagesCPUEworkshop.R) file. This should
+run the [**PackagesCPUEWorkshop**](PackagesCPUEworkshop.R) file. This should
 be done before the workshop and will take at least 30 minutes or more,
 depending on your internet connection speed.
 
