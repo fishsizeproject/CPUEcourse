@@ -18,16 +18,7 @@ The [R script](Trout1.R) and the example [dataset](trout.csv). You can also acce
 
 Course slides will be available here.
 
-<br/>
-
-The tutorial video from the online course meeting
-
-<a href="https://youtu.be/X1G6AAHFq5M"> 
-    <img alt="video2" src="./images/video1s.png" 
-    width="350"> 
-</a>
-
-<br/>
+The tutorial video from the online course meeting is available [here](https://youtu.be/X1G6AAHFq5M).
 
 ## Further resources
 

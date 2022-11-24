@@ -18,17 +18,7 @@ The [R script](Bitterling1.R) and the example [dataset](bitterling.csv). You can
 
 Course slides will be available here.
 
-<br/>
-
-The tutorial video from the online course meeting
-
-<a href="https://youtu.be/Iw1LlytvOoA"> 
-    <img alt="video2" src="./images/video2s.png" 
-    width="350"> 
-</a>
-
-<br/>
-
+The tutorial video from the online course meeting is available [here](https://youtu.be/Iw1LlytvOoA).
 
 ## Further resources
 
