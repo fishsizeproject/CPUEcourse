@@ -12,11 +12,13 @@ This is a third module of the course, where we will again repeat the basic conce
 
 ## Data and scripts
 
-The [R script](Hilsha1.R) and the example [dataset](hilsha.csv). You can also access all the scripts and datasets from the course [GitHub page](https://github.com/fishsizeproject/CPUEcourse).
+The [**R script**](Hilsha1.R) and the example [**dataset**](hilsha.csv). You can also access all the scripts and datasets from the course [GitHub page](https://github.com/fishsizeproject/CPUEcourse).
 
 ## Slides and video
 
-Course slides will soon be available here. The tutorial video from the online course meeting will be available here after November 24.
+Course slides will be available here.
+
+The tutorial [**video**](https://youtu.be/eridyDYjF7Q) from the online meeting: lecture and the R script presentation.
 
 ## Further resources
 

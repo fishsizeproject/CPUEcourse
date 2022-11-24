@@ -10,15 +10,17 @@ This is the final and most advanced part of the course, where we tackle time ser
 
 ![zander](./images/zander.png)
 
-<center> Pikeperch drawing by Amy Coghlan </center>
+<center>Pikeperch drawing by Amy Coghlan</center>
 
 ## Data and scripts
 
-The [R script](Zander1.R) and the example [dataset](zander.csv). You can also access all the scripts and datasets from the course [GitHub page](https://github.com/fishsizeproject/CPUEcourse).
+The [**R script**](Zander1.R) and the example [**dataset**](zander.csv). You can also access all the scripts and datasets from the course [GitHub page](https://github.com/fishsizeproject/CPUEcourse).
 
 ## Slides and video
 
-Course slides will soon be available here. The tutorial video from the online course meeting will be available here after November 24.
+Course slides will be available here.
+
+The tutorial [**video**](https://youtu.be/O1HtsUxuA18) from the online meeting: lecture, R script presentation and the day 2 discussion.
 
 ## Further resources
 
