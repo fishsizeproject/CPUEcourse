@@ -16,7 +16,14 @@ The [R script](Trout1.R) and the example [dataset](trout.csv). You can also acce
 
 ## Slides and video
 
-Course slides will soon be available here. The tutorial video from the online course meeting will be available here after November 23.
+Course slides will be available here.
+
+<br/>
+
+The tutorial video from the online course meeting
+
+<a href="https://youtu.be/X1G6AAHFq5M"> <img src="./images/video1s.png" alt="Qries" width="350"/> </a>
+
 
 ## Further resources
 
