@@ -27,6 +27,9 @@ The tutorial video from the online course meeting
     width="350"> 
 </a>
 
+<br/>
+
+
 ## Further resources
 
 Links to further resources will be added here.
