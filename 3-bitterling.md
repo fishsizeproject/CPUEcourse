@@ -22,7 +22,10 @@ Course slides will be available here.
 
 The tutorial video from the online course meeting
 
-<a href="https://youtu.be/Iw1LlytvOoA"> <img src="./images/video2s.png" alt="video2" width="350"/> </a>
+<a href="https://youtu.be/Iw1LlytvOoA"> 
+    <img alt="video2" src="./images/video2s.png" 
+    width="350"> 
+</a>
 
 ## Further resources
 
