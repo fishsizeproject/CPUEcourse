@@ -16,7 +16,13 @@ The [R script](Bitterling1.R) and the example [dataset](bitterling.csv). You can
 
 ## Slides and video
 
-Course slides will soon be available here. The tutorial video from the online course meeting will be available here after November 23.
+Course slides will be available here.
+
+<br/>
+
+The tutorial video from the online course meeting
+
+<a href="https://youtu.be/Iw1LlytvOoA"> <img src="./images/video2s.png" alt="Qries" width="350"/> </a>
 
 ## Further resources
 
