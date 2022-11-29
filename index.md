@@ -4,11 +4,13 @@ editor_options:
   markdown: 
     wrap: 72
 ---
-<center>
 
-# Course 1: Catch per unit effort data standardisation in R for fisheries biologists and practitioners
+<h1 style="text-align:center;">
 
-</center>
+# Course 1: Catch per unit effort data standardisation in R for fisheries
+biologists and practitioners
+
+</h1>
 
 ![course_image](./images/course_image.png)
 
