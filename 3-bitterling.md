@@ -16,9 +16,9 @@ The [**R script**](Bitterling1.R) and the example [**dataset**](bitterling.csv).
 
 ## Slides and video
 
-Course slides will be available here.
-
 The tutorial [**video**](https://youtu.be/Iw1LlytvOoA) from the online meeting: lecture, R script presentation and the day 1 discussion. 
+
+You can also download [**slides**](slides/cpueD1P2.pdf) from the second tutorial. 
 
 ## Further resources
 

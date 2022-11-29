@@ -81,12 +81,12 @@ to stay informed and have not registered yet, you can fill in this
 form**](https://docs.google.com/forms/d/e/1FAIpQLSehWbFhzKt_WYETHsX73Kph9Iw__a8DaaZbf6z_ZZq6rBwvqg/viewform?usp=sf_link)
 so that we have your contact details.
 
-<h1 style="text-align:center;">
+<h2 style="text-align:center;">
 
 Course 2: Further points on exploring, cleaning & filtering data prior
 to analysis
 
-</h1>
+</h2>
 
 This auxilary course provides further introduction and discussion about
 data exploration. This course is not directly related to the CPUE
@@ -114,7 +114,7 @@ under grant agreement with the Research Council of Lithuania (LMTLT).
 
 <center>
 
-Pew Fellows Program in Marine Conservation at
+**Pew Fellows Program in Marine Conservation** at
 
 <b> The Pew Charitable Trusts </b>
 
