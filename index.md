@@ -92,7 +92,7 @@ This auxilary course provides further introduction and discussion about
 data exploration. This course is not directly related to the CPUE
 standardisation course above and can be done with or without completing
 the previous course. The data exploration course has been prepared and
-contributed by Dr Harry Gorfine, fisheries biologist at Nature Research
+contributed by **Dr Harry Gorfine**, fisheries biologist at Nature Research
 Centre, Lithuania and Victorian Fisheries Authority, Australia. The
 course provides a general overview of data exploration challenges and
 good practices and is intended to be followed independently.
