@@ -75,6 +75,8 @@ to stay informed and have not registered yet, you can fill in this
 form**](https://docs.google.com/forms/d/e/1FAIpQLSehWbFhzKt_WYETHsX73Kph9Iw__a8DaaZbf6z_ZZq6rBwvqg/viewform?usp=sf_link)
 so that we have your contact details.
 
+<br/>
+
 <h1 style="text-align:center;">
 
 Course 2: Further points on exploring, cleaning & filtering data prior
