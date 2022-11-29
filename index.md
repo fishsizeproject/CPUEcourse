@@ -4,9 +4,11 @@ editor_options:
   markdown: 
     wrap: 72
 ---
+<center>
 
-# Course 1: Catch per unit effort data standardisation in R for fisheries
-biologists and practitioners
+# Course 1: Catch per unit effort data standardisation in R for fisheries biologists and practitioners
+
+</center>
 
 ![course_image](./images/course_image.png)
 
@@ -71,8 +73,12 @@ to stay informed and have not registered yet, you can fill in this
 form**](https://docs.google.com/forms/d/e/1FAIpQLSehWbFhzKt_WYETHsX73Kph9Iw__a8DaaZbf6z_ZZq6rBwvqg/viewform?usp=sf_link)
 so that we have your contact details.
 
+<center>
+
 ## Course 2: Further points on exploring, cleaning & filtering data prior
 to analysis
+
+</center>
 
 This auxilary course provides further introduction and discussion about
 data exploration. This course is not directly related to the CPUE
@@ -99,7 +105,7 @@ under grant agreement with the Research Council of Lithuania (LMTLT).
 
 <center>
 
-Pew Fellows Program in Marine Conservation at
+<b>Pew Fellows Program in Marine Conservation </b> at
 
 <b> The Pew Charitable Trusts </b>
 

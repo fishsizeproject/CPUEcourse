@@ -7,7 +7,7 @@ editor_options:
 
 <sub>[Course Overview](index.md) \> Introduction and preparation</sub>
 
-# Introduction
+# Preparing for the course
 
 This course assumes basic knowledge of statistics and programming in R.
 
