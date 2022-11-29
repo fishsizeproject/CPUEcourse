@@ -7,7 +7,7 @@ editor_options:
 
 <h1 style="text-align:center;">
 
-# Course 1: Catch per unit effort data standardisation in R for fisheries
+Course 1: Catch per unit effort data standardisation in R for fisheries
 biologists and practitioners
 
 </h1>
@@ -75,12 +75,12 @@ to stay informed and have not registered yet, you can fill in this
 form**](https://docs.google.com/forms/d/e/1FAIpQLSehWbFhzKt_WYETHsX73Kph9Iw__a8DaaZbf6z_ZZq6rBwvqg/viewform?usp=sf_link)
 so that we have your contact details.
 
-<center>
+<h1 style="text-align:center;">
 
-## Course 2: Further points on exploring, cleaning & filtering data prior
+Course 2: Further points on exploring, cleaning & filtering data prior
 to analysis
 
-</center>
+</h1>
 
 This auxilary course provides further introduction and discussion about
 data exploration. This course is not directly related to the CPUE
