@@ -18,7 +18,7 @@ The [**R script**](Hilsha1.R) and the example [**dataset**](hilsha.csv). You can
 
 The tutorial [**video**](https://youtu.be/eridyDYjF7Q) from the online meeting: lecture and the R script presentation.
 
-You can also download [**slides**](slides/cpueD2P1.pdf) from the third tutorial. 
+And you can also download [**slides**](slides/cpueD2P1.pdf) from this lecture.
 
 ## Further resources
 

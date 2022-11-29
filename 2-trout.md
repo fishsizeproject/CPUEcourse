@@ -18,7 +18,7 @@ The [**R script**](Trout1.R) and the example [**dataset**](trout.csv). You can a
 
 The tutorial [**video**](https://youtu.be/X1G6AAHFq5M) from the online meeting: lecture and the R script presentation.
 
-You can also download [**slides**](slides/cpueD1P1.pdf) from the first tutorial.
+And you can also download [**slides**](slides/cpueD1P1.pdf) from this lecture. 
 
 ## Further resources
 

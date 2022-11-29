@@ -20,7 +20,7 @@ The [**R script**](Zander1.R) and the example [**dataset**](zander.csv). You can
 
 The tutorial [**video**](https://youtu.be/O1HtsUxuA18) from the online meeting: lecture, R script presentation and the day 2 discussion.
 
-You can also download [**slides**](slides/cpueD2P2.pdf) from the fourth tutorial. 
+And you can also download [**slides**](slides/cpueD2P2.pdf) from this lecture.
 
 ## Further resources
 
