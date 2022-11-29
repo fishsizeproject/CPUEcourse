@@ -5,12 +5,8 @@ editor_options:
     wrap: 72
 ---
 
-<h1 style="text-align:center;">
-
-Course 1: Catch per unit effort data standardisation in R for fisheries
+# Course 1: Catch per unit effort data standardisation in R for fisheries
 biologists and practitioners
-
-</h1>
 
 ![course_image](./images/course_image.png)
 
@@ -53,11 +49,7 @@ Australia). Additional technical support is provided Dr Catarina Silva
 (Nature Research Centre) and Dr Eglė Jakubavičiūtė (Nature Research
 Centre).
 
-<br/>
-
 ## Course content
-
-<br/>
 
 Part 1 - [**Introduction and preparation**](1-introduction.md)
 
@@ -69,8 +61,6 @@ Part 4 - [**Zero inflated general linear mixed models**](4-hilsha.md)
 
 Part 5 - [**Time series analysis and Bayesian inference**](5-zander.md)
 
-<br/>
-
 ## Feedback
 
 If you completed the course, we greatly appreciate your
@@ -81,12 +71,8 @@ to stay informed and have not registered yet, you can fill in this
 form**](https://docs.google.com/forms/d/e/1FAIpQLSehWbFhzKt_WYETHsX73Kph9Iw__a8DaaZbf6z_ZZq6rBwvqg/viewform?usp=sf_link)
 so that we have your contact details.
 
-<h2 style="text-align:center;">
-
-Course 2: Further points on exploring, cleaning & filtering data prior
+## Course 2: Further points on exploring, cleaning & filtering data prior
 to analysis
-
-</h2>
 
 This auxilary course provides further introduction and discussion about
 data exploration. This course is not directly related to the CPUE
@@ -97,7 +83,6 @@ Centre, Lithuania and Victorian Fisheries Authority, Australia. The
 course provides a general overview of data exploration challenges and
 good practices and is intended to be followed independently.
 
-<br/>
 
 [**Data exploration course materials**](data_exploration.md)
 
