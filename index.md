@@ -107,10 +107,11 @@ under grant agreement with the Research Council of Lithuania (LMTLT).
 
 <br/>
 
+<!-- 
 <center>
 
 <b>Pew Fellows Program in Marine Conservation </b> at
 
 <b> The Pew Charitable Trusts </b>
 
-</center>
+</center> -->
