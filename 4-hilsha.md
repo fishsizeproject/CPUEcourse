@@ -20,8 +20,4 @@ The tutorial [**video**](https://youtu.be/eridyDYjF7Q) from the online meeting: 
 
 And you can also download [**slides**](slides/cpueD2P1.pdf) from this lecture.
 
-## Further resources
-
-Links to further resources will be added here.
-
 <br/>
